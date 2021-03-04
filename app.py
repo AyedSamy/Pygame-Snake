@@ -80,7 +80,7 @@ class SnakeGame:
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            self.speed += 3
+            #self.speed += 3
             self._place_food()
         else:
             self.snake.pop()
@@ -99,21 +99,22 @@ class SnakeGame:
             #return True
         # when the snake enters in collision with the wall, it reappears on the other side
         if self.head.x > self.w - BLOCK_SIZE:
+            del self.snake[0]
             self.head = Point(0, self.head.y)
             self.snake.insert(0, self.head)
-            self.snake.pop()
         elif self.head.x < 0:
+            del self.snake[0]
             self.head = Point(self.w - BLOCK_SIZE, self.head.y)
             self.snake.insert(0, self.head)
-            self.snake.pop()
         elif self.head.y > self.h - BLOCK_SIZE:
+            del self.snake[0]
             self.head = Point(self.head.x, 0)
             self.snake.insert(0, self.head)
-            self.snake.pop()
         elif self.head.y < 0:
+            del self.snake[0]
             self.head = Point(self.head.x, self.h - BLOCK_SIZE)
             self.snake.insert(0, self.head)
-            self.snake.pop()
+
         # hits itself
         if self.head in self.snake[1:]:
             return True
